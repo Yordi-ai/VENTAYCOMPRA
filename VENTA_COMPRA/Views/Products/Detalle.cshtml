@@ -1,0 +1,300 @@
+﻿@model Product
+
+<div class="container-fluid">
+    <!-- Usa container-fluid para que la tarjeta ocupe más ancho -->
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Ajusta el ancho de la columna para que sea más ancha -->
+            <div class="card shadow-lg">
+                <div class="row g-0">
+                    <!-- Imagen -->
+                    <div class="col-md-6">
+                        <!-- Ajusta la proporción de la imagen -->
+                        <img src="/products/@Model.ImageFileName" class="img-fluid rounded-start product-img" alt="@Model.NombreAuto" />
+                    </div>
+                    <!-- Contenido de la tarjeta -->
+                    <div class="col-md-6">
+                        <!-- Ajusta la proporción del contenido -->
+                        <div class="card-body">
+                            <!-- Título y precio -->
+                            <h3 class="card-title">@Model.NombreAuto</h3>
+                            <h4 class="card-text text-primary">$@Model.Precio (S/ @Model.Precio * 3.759)</h4> <!-- Conversión aproximada -->
+
+                            <hr />
+                            <!-- Resumen -->
+                            <h5 class="mb-3">Resumen</h5>
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="card-text"><strong>Kilómetros:</strong> @Model.Kilometros</p>
+                                    <p class="card-text"><strong>Motor:</strong> @Model.Motor</p>
+                                    <p class="card-text"><strong>Año Modelo:</strong> @Model.AñoModelo</p>
+                                    <p class="card-text"><strong>Tipo:</strong> @Model.Tipo</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="card-text"><strong>Combustible:</strong> @Model.Combustible</p>
+                                    <p class="card-text"><strong>Color:</strong> @Model.Color</p>
+                                    <p class="card-text"><strong>Transmisión:</strong> @Model.Transmision</p>
+                                    <p class="card-text"><strong>Puertas:</strong> @Model.Puertas</p>
+                                </div>
+                            </div>
+                            <hr />
+                            <!-- Descripción -->
+                            <h5 class="mb-3">Descripción</h5>
+                            <p class="card-text">@Model.Descripcion</p>
+                            <p class="card-text"><strong>Fecha de Venta:</strong> @Model.CreateAt.ToShortDateString()</p>
+
+                            <!-- Botón de acción -->
+                            <div class="text-end">
+                                <a class="btn btn-primary" asp-controller="Products" asp-action="Index">Volver a la lista</a>
+                                <!-- Botón para abrir el modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#contactModal">
+                                    Cotizar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contactModalLabel">Cotiza tu Auto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <!-- Campos del formulario similar a la imagen -->
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="fullName" class="form-label">Nombre Completo</label>
+                            <input type="text" class="form-control" id="fullName" placeholder="Nombre Completo">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="dni" class="form-label">DNI</label>
+                            <input type="text" class="form-control" id="dni" placeholder="DNI">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <label for="document" class="form-label">N° Documento</label>
+                            <input type="text" class="form-control" id="document" placeholder="N° Documento">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="mobile" class="form-label">Móvil</label>
+                            <input type="text" class="form-control" id="mobile" placeholder="Móvil">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="phone" class="form-label">N° Teléfono</label>
+                            <input type="text" class="form-control" id="phone" placeholder="N° Teléfono">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" placeholder="Email">
+                        </div>
+
+                        <!-- Resto de los campos del formulario -->
+                        <!-- Agrega aquí los otros campos según sea necesario -->
+
+                        <div class="form-check mb-3">
+                            <input type="checkbox" class="form-check-input" id="terms1">
+                            <label class="form-check-label" for="terms1">He leído y acepto los términos y condiciones de la política de privacidad vigente.</label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input type="checkbox" class="form-check-input" id="terms2">
+                            <label class="form-check-label" for="terms2">Acepto recibir información sobre productos y servicios.</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Agrega Bootstrap al proyecto -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<style>
+    /* Estilos para la tarjeta de producto */
+    .card {
+        background-color: #121116; /* Color de fondo de la tarjeta */
+        border: 2px solid #FA0555; /* Borde de la tarjeta con color #FA0555 */
+        margin-top: 20px;
+        padding: 20px; /* Añade relleno para aumentar el tamaño de la tarjeta */
+        font-size: 1.25rem; /* Aumenta el tamaño del texto dentro de la tarjeta */
+        max-width: 300%; /* Asegura que la tarjeta use todo el ancho disponible */
+    }
+
+    body {
+        background-color: #F0F2F6;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif; /* O la fuente que estés usando */
+    }
+    h5{
+        color:aqua;
+        font-size: 1.7rem;
+    }
+    strong{
+        color: #FFFFFF;
+    }
+
+    .card-title {
+        font-size: 2rem; /* Aumenta el tamaño del título */
+        font-weight: 600;
+        color: #FE027B; /* Color del nombre del auto */
+    }
+
+    .card-text {
+        font-size: 1.25rem; /* Aumenta el tamaño del texto */
+        color: #676767; /* Color general de las letras */
+    }
+
+    /* Estilos para el resumen */
+    .card-body .summary p {
+        color: #F3F3F4; /* Color de los atributos en el resumen */
+    }
+
+    .card-body .summary strong {
+        color: #360D1B; /* Color del texto fuerte en el resumen */
+    }
+
+    .text-primary {
+        color: #FFC126 !important; /* Color del precio */
+        font-size: 1.25rem; /* Aumenta el tamaño del texto del precio */
+    }
+
+    .card-body .description p {
+        color: #FD0081; /* Color de la descripción y fecha de venta */
+    }
+
+    .card-body .description strong {
+        color: #FD0081; /* Color de la descripción y fecha de venta */
+    }
+
+    .card-body {
+        padding: 30px; /* Aumenta el relleno del cuerpo de la tarjeta */
+        color: #FBFBFB; /* Asegura que todos los textos sean blancos */
+    }
+
+    .product-img {
+        height: auto; /* Ajusta la altura para mantener la proporción */
+        width: 100%; /* Asegura que la imagen ocupe todo el ancho del contenedor */
+        max-height: 400px; /* Limita la altura máxima para evitar que la imagen sea demasiado alta */
+        object-fit: cover; /* Mantiene la proporción de la imagen */
+    }
+
+    /* Estilos para los botones */
+    .btn-primary {
+        background-color: #F10A66;
+        border-color: #F10A66;
+        font-size: 1.25rem; /* Aumenta el tamaño del texto en el botón */
+        padding: 15px 25px; /* Aumenta el relleno del botón */
+        color: #FEB5C8; /* Color del texto del botón */
+        border-radius: 15px;
+    }
+
+        .btn-primary:hover {
+            text-decoration: underline;
+            background-color: #FA044F; /* Cambiar color de fondo al pasar el cursor */
+            color: #FEB5C8 !important;
+           
+        }
+
+    /* Estilo para los separadores */
+    .card-body hr {
+        border-top: 2px solid #FA0555; /* Color del separador con #FA0555 */
+    }
+
+
+    /* Estilos generales para el modal */
+    .modal-content {
+        border-radius: 10px;
+        padding: 20px;
+        background-color: #fff;
+    }
+
+    /* Título del modal */
+    .modal-title {
+        color: #ff9800; /* Color similar al de la imagen */
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    /* Estilos del formulario dentro del modal */
+    .form-label {
+        font-weight: bold;
+        font-size: 1rem;
+        color: #333;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    /* Aumenta el tamaño de los checkboxes y su texto */
+    .form-check-input {
+        width: 20px;
+        height: 20px;
+    }
+
+    .form-check-label {
+        font-size: 0.9rem;
+        margin-left: 10px;
+        color: #666;
+    }
+
+    /* Estilos del botón Enviar Solicitud */
+
+    /* Estilos del botón cerrar */
+    .btn-secondary {
+        background-color: #777;
+        border-color: #777;
+        font-size: 1.1rem;
+        padding: 10px 20px;
+        border-radius: 5px;
+    }
+
+        .btn-secondary:hover {
+            background-color: #666;
+            border-color: #666;
+        }
+
+    /* Aumenta el padding del modal */
+    .modal-body {
+        padding: 30px;
+    }
+
+    .modal-header {
+        border-bottom: 2px solid #ff9800;
+    }
+
+    /* Estilos específicos para campos más pequeños */
+    .col-md-3, .col-md-6 {
+        padding-bottom: 15px;
+    }
+
+    /* Estilo para checkbox de términos y condiciones */
+    .form-check {
+        margin-bottom: 20px;
+    }
+
+    /* Estilos de las etiquetas de error */
+    .text-danger {
+        font-size: 0.85rem;
+        color: red;
+    }
+</style>
